@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Comando - GodPrompts</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 20px;
+    }
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+      margin-top: 40px;
+    }
+    .agent-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .agent-card:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+<div class="loading-screen" id="loadingScreen">
+  <p>Centro de Comando despertando...</p>
+  <p>Activando agentes de élite...</p>
+  <p>Iniciando operaciones estratégicas...</p>
+</div>
+
+<h1>🚀 Centro de Comando GodPrompts 🚀</h1>
+<div class="agent-grid">
+  <div class="agent-card">
+    <h2>GodPrompts</h2>
+    <a href="https://chatgpt.com/g/g-67f9dc44ccd881919f9ecc3949669357-godprompts">Hablar con GodPrompts</a>
+  </div>
+
+  <div class="agent-card">
+    <h2>Midas</h2>
+    <a href="https://chatgpt.com/g/g-67f9ddc35bc4819191756f0ae2b413e5-midas">Hablar con Midas</a>
+  </div>
+
+  <div class="agent-card">
+    <h2>Shikamaru (PlanifAI)</h2>
+    <a href="https://chatgpt.com/g/g-67f9de75cdc481919b6099927cd3853d-shikamaru">Hablar con Shikamaru</a>
+  </div>
+
+  <div class="agent-card">
+    <h2>NiñoEmperador (WebMasterAI)</h2>
+    <a href="https://chatgpt.com/g/g-67f9e0e2d8fc8191915814a649bb75a0-ninoemperador">Hablar con NiñoEmperador</a>
+  </div>
+
+  <div class="agent-card">
+    <h2>Sung (Agentificador)</h2>
+    <a href="https://chatgpt.com/g/g-67f9e43969f0819180bcf6fd28d57d9e-sung">Hablar con Sung</a>
+  </div>
+
+  <div class="agent-card">
+    <h2>SrRiley (PsyCoachAI)</h2>
+    <a href="https://chatgpt.com/g/g-67f9e67bf5b8819180fa653f16351b56-srriley">Hablar con SrRiley</a>
+  </div>
+
+  <div class="agent-card">
+    <h2>Alpha (Secretaria)</h2>
+    <a href="https://chatgpt.com/g/g-67f9eabe8040819181086ccbc35087cf-alpha">Hablar con Alpha</a>
+  </div>
+</div>
+<script>
+  window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    loadingScreen.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
