@@ -1,117 +1,103 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Centro de Comando - GodPrompts</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      justify-content: center;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 20px;
-    }
-    .agent-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      width: 90%;
-      max-width: 1200px;
-      margin-top: 40px;
-    }
-    .agent-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .agent-card:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.2);
-    }
-    a {
-      color: #00ffff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      z-index: 9999;
-    }
-  </style>
-</head>
-<body>
-<div class="loading-screen" id="loadingScreen">
-  <p>Centro de Comando despertando...</p>
-  <p>Activando agentes de élite...</p>
-  <p>Iniciando operaciones estratégicas...</p>
-</div>
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
 
-<h1>🚀 Centro de Comando GodPrompts 🚀</h1>
-<div class="agent-grid">
-  <div class="agent-card">
-    <h2>GodPrompts</h2>
-    <a href="https://chatgpt.com/g/g-67f9dc44ccd881919f9ecc3949669357-godprompts">Hablar con GodPrompts</a>
-  </div>
+export default function CentroDeComando() {
+  const [loading, setLoading] = useState(true);
 
-  <div class="agent-card">
-    <h2>Midas</h2>
-    <a href="https://chatgpt.com/g/g-67f9ddc35bc4819191756f0ae2b413e5-midas">Hablar con Midas</a>
-  </div>
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  <div class="agent-card">
-    <h2>Shikamaru (PlanifAI)</h2>
-    <a href="https://chatgpt.com/g/g-67f9de75cdc481919b6099927cd3853d-shikamaru">Hablar con Shikamaru</a>
-  </div>
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2 }}
+          className="text-2xl"
+        >
+          Despertando a la Legión Silenciosa...
+          <br />
+          Cargando conocimiento ancestral.
+        </motion.div>
+      </div>
+    );
+  }
 
-  <div class="agent-card">
-    <h2>NiñoEmperador (WebMasterAI)</h2>
-    <a href="https://chatgpt.com/g/g-67f9e0e2d8fc8191915814a649bb75a0-ninoemperador">Hablar con NiñoEmperador</a>
-  </div>
+  return (
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <div className="w-64 bg-gray-900 text-white p-4 flex flex-col space-y-4">
+        <h2 className="text-2xl font-bold mb-6">Centro de Comando</h2>
+        <nav className="flex flex-col space-y-2">
+          <Button variant="ghost">Inicio / Dashboard</Button>
+          <Button variant="ghost">Agentes</Button>
+          <Button variant="ghost">Misiones / Tareas</Button>
+          <Button variant="ghost">Estado del Ecosistema</Button>
+          <Button variant="ghost">Visión y Propósito</Button>
+          <Button variant="ghost">Configuración</Button>
+        </nav>
+      </div>
 
-  <div class="agent-card">
-    <h2>Sung (Agentificador)</h2>
-    <a href="https://chatgpt.com/g/g-67f9e43969f0819180bcf6fd28d57d9e-sung">Hablar con Sung</a>
-  </div>
+      {/* Main Content */}
+      <div className="flex-1 p-6 overflow-y-auto bg-gray-100">
+        <h1 className="text-3xl font-bold mb-6">Hola, Comandante.</h1>
 
-  <div class="agent-card">
-    <h2>SrRiley (PsyCoachAI)</h2>
-    <a href="https://chatgpt.com/g/g-67f9e67bf5b8819180fa653f16351b56-srriley">Hablar con SrRiley</a>
-  </div>
+        {/* Métricas Rápidas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-sm text-gray-500">Agentes Activos</p>
+              <p className="text-2xl font-bold">12</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-sm text-gray-500">Misiones en Progreso</p>
+              <p className="text-2xl font-bold">8</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-sm text-gray-500">Misiones Completadas Hoy</p>
+              <p className="text-2xl font-bold">3</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-sm text-gray-500">Alertas Detectadas</p>
+              <p className="text-2xl font-bold">2</p>
+            </CardContent>
+          </Card>
+        </div>
 
-  <div class="agent-card">
-    <h2>Alpha (Secretaria)</h2>
-    <a href="https://chatgpt.com/g/g-67f9eabe8040819181086ccbc35087cf-alpha">Hablar con Alpha</a>
-  </div>
-</div>
-<script>
-  window.addEventListener('load', () => {
-    const loadingScreen = document.getElementById('loadingScreen');
-    loadingScreen.style.display = 'none';
-  });
-</script>
-
-</body>
-</html>
+        {/* Agentes */}
+        <h2 className="text-2xl font-bold mb-4">Agentes</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { nombre: "GodPrompts", rol: "Maestro en creación de prompts" },
+            { nombre: "Midas", rol: "Mentor en monetización" },
+            { nombre: "Shikamaru", rol: "Planificador definitivo" },
+            { nombre: "NiñoEmperador", rol: "Programador y diseñador web" },
+            { nombre: "Sung", rol: "Creador de agentes" },
+            { nombre: "SrRiley", rol: "Mentor en inteligencia emocional" },
+          ].map((agente) => (
+            <Card key={agente.nombre}>
+              <CardContent className="p-4 flex flex-col items-center">
+                <div className="w-16 h-16 bg-gray-300 rounded-full mb-2" />
+                <h3 className="text-lg font-bold">{agente.nombre}</h3>
+                <p className="text-sm text-gray-500 text-center">{agente.rol}</p>
+                <Button className="mt-4">Contactar</Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
