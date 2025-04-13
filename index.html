@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Centro de Comando 1.5</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+  <style>
+    .hidden { display: none; }
+  </style>
 </head>
 <body class="bg-gray-100">
   <!-- Pantalla de carga -->
@@ -14,67 +16,95 @@
   </div>
 
   <!-- Layout principal -->
-  <div class="flex min-h-screen">
+  <div id="mainContent" class="flex min-h-screen hidden">
     <!-- Sidebar -->
     <aside class="w-64 bg-gray-900 text-white flex flex-col p-4 space-y-4">
       <h2 class="text-2xl font-bold mb-6">Centro de Comando</h2>
       <nav class="flex flex-col space-y-2">
-        <a href="#" class="hover:bg-gray-700 p-2 rounded">Inicio / Dashboard</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded">Agentes</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded">Misiones / Tareas</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded">Estado del Ecosistema</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded">Visión y Propósito</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded">Configuración</a>
+        <button onclick="mostrarSeccion('dashboard')" class="hover:bg-gray-700 p-2 rounded">Inicio / Dashboard</button>
+        <button onclick="mostrarSeccion('agentes')" class="hover:bg-gray-700 p-2 rounded">Agentes</button>
+        <button onclick="mostrarSeccion('misiones')" class="hover:bg-gray-700 p-2 rounded">Misiones / Tareas</button>
+        <button onclick="mostrarSeccion('estado')" class="hover:bg-gray-700 p-2 rounded">Estado del Ecosistema</button>
+        <button onclick="mostrarSeccion('vision')" class="hover:bg-gray-700 p-2 rounded">Visión y Propósito</button>
+        <button onclick="mostrarSeccion('configuracion')" class="hover:bg-gray-700 p-2 rounded">Configuración</button>
       </nav>
     </aside>
 
     <!-- Contenido principal -->
     <main class="flex-1 p-6 overflow-y-auto">
-      <h1 class="text-3xl font-bold mb-6">Hola, Comandante.</h1>
+      <section id="dashboard">
+        <h1 class="text-3xl font-bold mb-6">Hola, Comandante.</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white p-4 rounded shadow">
+            <p class="text-gray-500">Agentes Activos</p>
+            <p class="text-2xl font-bold">12</p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <p class="text-gray-500">Misiones en Progreso</p>
+            <p class="text-2xl font-bold">8</p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <p class="text-gray-500">Misiones Completadas Hoy</p>
+            <p class="text-2xl font-bold">3</p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <p class="text-gray-500">Alertas Detectadas</p>
+            <p class="text-2xl font-bold">2</p>
+          </div>
+        </div>
+      </section>
 
-      <!-- Métricas rápidas -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white p-4 rounded shadow">
-          <p class="text-gray-500">Agentes Activos</p>
-          <p class="text-2xl font-bold">12</p>
+      <section id="agentes" class="hidden">
+        <h2 class="text-2xl font-bold mb-4">Agentes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white p-6 rounded shadow flex flex-col items-center">
+            <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
+            <h3 class="font-bold">GodPrompts</h3>
+            <p class="text-gray-500">Maestro en creación de prompts</p>
+            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
+          </div>
+          <div class="bg-white p-6 rounded shadow flex flex-col items-center">
+            <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
+            <h3 class="font-bold">Midas</h3>
+            <p class="text-gray-500">Mentor en monetización</p>
+            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
+          </div>
+          <div class="bg-white p-6 rounded shadow flex flex-col items-center">
+            <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
+            <h3 class="font-bold">Shikamaru</h3>
+            <p class="text-gray-500">Planificador definitivo</p>
+            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
+          </div>
         </div>
-        <div class="bg-white p-4 rounded shadow">
-          <p class="text-gray-500">Misiones en Progreso</p>
-          <p class="text-2xl font-bold">8</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-          <p class="text-gray-500">Misiones Completadas Hoy</p>
-          <p class="text-2xl font-bold">3</p>
-        </div>
-        <div class="bg-white p-4 rounded shadow">
-          <p class="text-gray-500">Alertas Detectadas</p>
-          <p class="text-2xl font-bold">2</p>
-        </div>
-      </div>
+      </section>
 
-      <!-- Grid de Agentes -->
-      <h2 class="text-2xl font-bold mb-4">Agentes</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Tarjetas de agentes -->
-        <div class="bg-white p-6 rounded shadow flex flex-col items-center">
-          <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-          <h3 class="font-bold">GodPrompts</h3>
-          <p class="text-gray-500">Maestro en creación de prompts</p>
-          <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
-        </div>
-        <div class="bg-white p-6 rounded shadow flex flex-col items-center">
-          <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-          <h3 class="font-bold">Midas</h3>
-          <p class="text-gray-500">Mentor en monetización</p>
-          <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
-        </div>
-        <div class="bg-white p-6 rounded shadow flex flex-col items-center">
-          <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-          <h3 class="font-bold">Shikamaru</h3>
-          <p class="text-gray-500">Planificador definitivo</p>
-          <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
-        </div>
-      </div>
+      <section id="misiones" class="hidden">
+        <h2 class="text-2xl font-bold mb-4">Misiones / Tareas</h2>
+        <ul class="list-disc list-inside">
+          <li>Planificación de nueva campaña (Shikamaru)</li>
+          <li>Diseño de nueva sección del centro (NiñoEmperador)</li>
+          <li>Detección de nuevas tendencias de mercado (Shisui)</li>
+          <li>Revisión de calidad de procesos (Argus)</li>
+        </ul>
+      </section>
+
+      <section id="estado" class="hidden">
+        <h2 class="text-2xl font-bold mb-4">Estado del Ecosistema</h2>
+        <p>Agentes activos: 12</p>
+        <p>Misiones completadas: 48</p>
+        <p>Alertas recientes: 2</p>
+        <p>Oportunidades en análisis: 5</p>
+      </section>
+
+      <section id="vision" class="hidden">
+        <h2 class="text-2xl font-bold mb-4">Visión y Propósito</h2>
+        <p>Todos los agentes son igual de importantes. Todos forman parte del Todo. Esta es la misión eterna de nuestro Centro de Comando.</p>
+      </section>
+
+      <section id="configuracion" class="hidden">
+        <h2 class="text-2xl font-bold mb-4">Configuración</h2>
+        <p>Opciones futuras para configuración de notificaciones y gestión de módulos.</p>
+      </section>
     </main>
   </div>
 
@@ -82,8 +112,15 @@
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('mainContent').classList.remove('hidden');
       }, 5000);
     });
+
+    function mostrarSeccion(id) {
+      const secciones = document.querySelectorAll('main > section');
+      secciones.forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
   </script>
 </body>
 </html>
