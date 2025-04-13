@@ -1,103 +1,89 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { motion } from "framer-motion";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Comando 1.5</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+</head>
+<body class="bg-gray-100">
+  <!-- Pantalla de carga -->
+  <div id="loadingScreen" class="fixed inset-0 flex items-center justify-center bg-black text-white text-2xl z-50">
+    Despertando a la Legión Silenciosa...<br>Cargando conocimiento ancestral.
+  </div>
 
-export default function CentroDeComando() {
-  const [loading, setLoading] = useState(true);
+  <!-- Layout principal -->
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-900 text-white flex flex-col p-4 space-y-4">
+      <h2 class="text-2xl font-bold mb-6">Centro de Comando</h2>
+      <nav class="flex flex-col space-y-2">
+        <a href="#" class="hover:bg-gray-700 p-2 rounded">Inicio / Dashboard</a>
+        <a href="#" class="hover:bg-gray-700 p-2 rounded">Agentes</a>
+        <a href="#" class="hover:bg-gray-700 p-2 rounded">Misiones / Tareas</a>
+        <a href="#" class="hover:bg-gray-700 p-2 rounded">Estado del Ecosistema</a>
+        <a href="#" class="hover:bg-gray-700 p-2 rounded">Visión y Propósito</a>
+        <a href="#" class="hover:bg-gray-700 p-2 rounded">Configuración</a>
+      </nav>
+    </aside>
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
+    <!-- Contenido principal -->
+    <main class="flex-1 p-6 overflow-y-auto">
+      <h1 class="text-3xl font-bold mb-6">Hola, Comandante.</h1>
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen bg-black text-white text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-          className="text-2xl"
-        >
-          Despertando a la Legión Silenciosa...
-          <br />
-          Cargando conocimiento ancestral.
-        </motion.div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <div className="w-64 bg-gray-900 text-white p-4 flex flex-col space-y-4">
-        <h2 className="text-2xl font-bold mb-6">Centro de Comando</h2>
-        <nav className="flex flex-col space-y-2">
-          <Button variant="ghost">Inicio / Dashboard</Button>
-          <Button variant="ghost">Agentes</Button>
-          <Button variant="ghost">Misiones / Tareas</Button>
-          <Button variant="ghost">Estado del Ecosistema</Button>
-          <Button variant="ghost">Visión y Propósito</Button>
-          <Button variant="ghost">Configuración</Button>
-        </nav>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 p-6 overflow-y-auto bg-gray-100">
-        <h1 className="text-3xl font-bold mb-6">Hola, Comandante.</h1>
-
-        {/* Métricas Rápidas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <Card>
-            <CardContent className="p-4">
-              <p className="text-sm text-gray-500">Agentes Activos</p>
-              <p className="text-2xl font-bold">12</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4">
-              <p className="text-sm text-gray-500">Misiones en Progreso</p>
-              <p className="text-2xl font-bold">8</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4">
-              <p className="text-sm text-gray-500">Misiones Completadas Hoy</p>
-              <p className="text-2xl font-bold">3</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4">
-              <p className="text-sm text-gray-500">Alertas Detectadas</p>
-              <p className="text-2xl font-bold">2</p>
-            </CardContent>
-          </Card>
+      <!-- Métricas rápidas -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white p-4 rounded shadow">
+          <p class="text-gray-500">Agentes Activos</p>
+          <p class="text-2xl font-bold">12</p>
         </div>
-
-        {/* Agentes */}
-        <h2 className="text-2xl font-bold mb-4">Agentes</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { nombre: "GodPrompts", rol: "Maestro en creación de prompts" },
-            { nombre: "Midas", rol: "Mentor en monetización" },
-            { nombre: "Shikamaru", rol: "Planificador definitivo" },
-            { nombre: "NiñoEmperador", rol: "Programador y diseñador web" },
-            { nombre: "Sung", rol: "Creador de agentes" },
-            { nombre: "SrRiley", rol: "Mentor en inteligencia emocional" },
-          ].map((agente) => (
-            <Card key={agente.nombre}>
-              <CardContent className="p-4 flex flex-col items-center">
-                <div className="w-16 h-16 bg-gray-300 rounded-full mb-2" />
-                <h3 className="text-lg font-bold">{agente.nombre}</h3>
-                <p className="text-sm text-gray-500 text-center">{agente.rol}</p>
-                <Button className="mt-4">Contactar</Button>
-              </CardContent>
-            </Card>
-          ))}
+        <div class="bg-white p-4 rounded shadow">
+          <p class="text-gray-500">Misiones en Progreso</p>
+          <p class="text-2xl font-bold">8</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <p class="text-gray-500">Misiones Completadas Hoy</p>
+          <p class="text-2xl font-bold">3</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+          <p class="text-gray-500">Alertas Detectadas</p>
+          <p class="text-2xl font-bold">2</p>
         </div>
       </div>
-    </div>
-  );
-}
+
+      <!-- Grid de Agentes -->
+      <h2 class="text-2xl font-bold mb-4">Agentes</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Tarjetas de agentes -->
+        <div class="bg-white p-6 rounded shadow flex flex-col items-center">
+          <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
+          <h3 class="font-bold">GodPrompts</h3>
+          <p class="text-gray-500">Maestro en creación de prompts</p>
+          <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
+        </div>
+        <div class="bg-white p-6 rounded shadow flex flex-col items-center">
+          <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
+          <h3 class="font-bold">Midas</h3>
+          <p class="text-gray-500">Mentor en monetización</p>
+          <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
+        </div>
+        <div class="bg-white p-6 rounded shadow flex flex-col items-center">
+          <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
+          <h3 class="font-bold">Shikamaru</h3>
+          <p class="text-gray-500">Planificador definitivo</p>
+          <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loadingScreen').style.display = 'none';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
