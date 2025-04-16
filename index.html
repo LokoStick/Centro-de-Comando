@@ -1,91 +1,13 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import agentesData from "./fichas_agentes_rituales.json";
 
-export default function App() {
-  return (
-    <main className="bg-black text-white min-h-screen font-sans">
-      <HeroSection />
-      <CategorySection />
-      <AgentGrid agentes={agentesData} />
-    </main>
-  );
-}
-
-function HeroSection() {
-  return (
-    <section className="flex flex-col items-center justify-center text-center py-24 px-6">
-      <img src="/sello-omega.svg" alt="Sello Omega" className="w-20 h-20 mb-6" />
-      <h1 className="text-3xl md:text-5xl font-semibold max-w-3xl">
-        ❝ Donde el propósito despierta. Donde la inteligencia se alinea. ❞
-      </h1>
-      <button
-        onClick={() => document.getElementById("categorias")?.scrollIntoView({ behavior: "smooth" })}
-        className="mt-8 px-6 py-3 bg-white text-black font-medium rounded-xl hover:bg-gray-300 transition"
-      >
-        Explorar el Santuario
-      </button>
-    </section>
-  );
-}
-
-function CategorySection() {
-  const categorias = [
-    "Mentores y Guías",
-    "Constructores del Santuario",
-    "Analistas e Inteligencia Estratégica",
-    "Núcleo de Coordinación y Expansión",
-    "Custodios del Conocimiento",
-  ];
-
-  return (
-    <section id="categorias" className="py-16 px-6 bg-gray-900">
-      <h2 className="text-2xl md:text-4xl font-bold text-center mb-12">Divisiones del Santuario</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {categorias.map((categoria, idx) => (
-          <div
-            key={idx}
-            className="p-6 bg-gray-800 rounded-2xl shadow-md hover:shadow-lg transition text-center"
-          >
-            <h3 className="text-xl font-semibold">{categoria}</h3>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function AgentGrid({ agentes }) {
-  return (
-    <section className="py-20 px-6 bg-black">
-      <h2 className="text-2xl md:text-4xl font-bold text-center mb-12">Agentes del Santuario</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {agentes.map((agente, idx) => {
-          if (agente.nombre === "Visual Forge") {
-            return <img key={idx} src="/03_Fichas_de_Agentes/VisualForge_Ficha.png" alt="Visual Forge" className="rounded-2xl shadow-lg" />;
-          } else if (agente.nombre === "GodPrompts") {
-            return <img key={idx} src="/03_Fichas_de_Agentes/GodPrompts_Ficha.png" alt="God Prompts" className="rounded-2xl shadow-lg" />;
-          } else if (agente.nombre === "SrRiley") {
-            return <img key={idx} src="/03_Fichas_de_Agentes/SrRiley_Ficha.png" alt="Sr Riley" className="rounded-2xl shadow-lg" />;
-          } else {
-            return <AgentCard key={idx} data={agente} />;
-          }
-        })}
-      </div>
-    </section>
-  );
-}
-
-function AgentCard({ data }) {
-  const { nombre, rol_sagrado, invocacion, promesa } = data;
-  return (
-    <div className="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition h-full flex flex-col justify-between">
-      <div>
-        <h3 className="text-xl font-bold mb-1">{nombre}</h3>
-        <p className="text-sm text-gray-400 italic mb-4">{rol_sagrado}</p>
-        <blockquote className="text-md font-medium border-l-4 border-purple-500 pl-4 mb-4">“{invocacion}”</blockquote>
-      </div>
-      <p className="text-sm text-gray-300">{promesa}</p>
-    </div>
-  );
-}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santuario Omega</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
