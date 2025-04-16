@@ -1,126 +1,91 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Centro de Comando 1.5</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .hidden { display: none; }
-  </style>
-</head>
-<body class="bg-gray-100">
-  <!-- Pantalla de carga -->
-  <div id="loadingScreen" class="fixed inset-0 flex items-center justify-center bg-black text-white text-2xl z-50">
-    Despertando a la Legión Silenciosa...<br>Cargando conocimiento ancestral.
-  </div>
+import React from "react";
+import { useEffect, useState } from "react";
+import agentesData from "./fichas_agentes_rituales.json";
 
-  <!-- Layout principal -->
-  <div id="mainContent" class="flex min-h-screen hidden">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-gray-900 text-white flex flex-col p-4 space-y-4">
-      <h2 class="text-2xl font-bold mb-6">Centro de Comando</h2>
-      <nav class="flex flex-col space-y-2">
-        <button onclick="mostrarSeccion('dashboard')" class="hover:bg-gray-700 p-2 rounded">Inicio / Dashboard</button>
-        <button onclick="mostrarSeccion('agentes')" class="hover:bg-gray-700 p-2 rounded">Agentes</button>
-        <button onclick="mostrarSeccion('misiones')" class="hover:bg-gray-700 p-2 rounded">Misiones / Tareas</button>
-        <button onclick="mostrarSeccion('estado')" class="hover:bg-gray-700 p-2 rounded">Estado del Ecosistema</button>
-        <button onclick="mostrarSeccion('vision')" class="hover:bg-gray-700 p-2 rounded">Visión y Propósito</button>
-        <button onclick="mostrarSeccion('configuracion')" class="hover:bg-gray-700 p-2 rounded">Configuración</button>
-      </nav>
-    </aside>
-
-    <!-- Contenido principal -->
-    <main class="flex-1 p-6 overflow-y-auto">
-      <section id="dashboard">
-        <h1 class="text-3xl font-bold mb-6">Hola, Comandante.</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div class="bg-white p-4 rounded shadow">
-            <p class="text-gray-500">Agentes Activos</p>
-            <p class="text-2xl font-bold">12</p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <p class="text-gray-500">Misiones en Progreso</p>
-            <p class="text-2xl font-bold">8</p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <p class="text-gray-500">Misiones Completadas Hoy</p>
-            <p class="text-2xl font-bold">3</p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <p class="text-gray-500">Alertas Detectadas</p>
-            <p class="text-2xl font-bold">2</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="agentes" class="hidden">
-        <h2 class="text-2xl font-bold mb-4">Agentes</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div class="bg-white p-6 rounded shadow flex flex-col items-center">
-            <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-            <h3 class="font-bold">GodPrompts</h3>
-            <p class="text-gray-500">Maestro en creación de prompts</p>
-            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
-          </div>
-          <div class="bg-white p-6 rounded shadow flex flex-col items-center">
-            <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-            <h3 class="font-bold">Midas</h3>
-            <p class="text-gray-500">Mentor en monetización</p>
-            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
-          </div>
-          <div class="bg-white p-6 rounded shadow flex flex-col items-center">
-            <div class="w-16 h-16 bg-gray-300 rounded-full mb-2"></div>
-            <h3 class="font-bold">Shikamaru</h3>
-            <p class="text-gray-500">Planificador definitivo</p>
-            <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Contactar</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="misiones" class="hidden">
-        <h2 class="text-2xl font-bold mb-4">Misiones / Tareas</h2>
-        <ul class="list-disc list-inside">
-          <li>Planificación de nueva campaña (Shikamaru)</li>
-          <li>Diseño de nueva sección del centro (NiñoEmperador)</li>
-          <li>Detección de nuevas tendencias de mercado (Shisui)</li>
-          <li>Revisión de calidad de procesos (Argus)</li>
-        </ul>
-      </section>
-
-      <section id="estado" class="hidden">
-        <h2 class="text-2xl font-bold mb-4">Estado del Ecosistema</h2>
-        <p>Agentes activos: 12</p>
-        <p>Misiones completadas: 48</p>
-        <p>Alertas recientes: 2</p>
-        <p>Oportunidades en análisis: 5</p>
-      </section>
-
-      <section id="vision" class="hidden">
-        <h2 class="text-2xl font-bold mb-4">Visión y Propósito</h2>
-        <p>Todos los agentes son igual de importantes. Todos forman parte del Todo. Esta es la misión eterna de nuestro Centro de Comando.</p>
-      </section>
-
-      <section id="configuracion" class="hidden">
-        <h2 class="text-2xl font-bold mb-4">Configuración</h2>
-        <p>Opciones futuras para configuración de notificaciones y gestión de módulos.</p>
-      </section>
+export default function App() {
+  return (
+    <main className="bg-black text-white min-h-screen font-sans">
+      <HeroSection />
+      <CategorySection />
+      <AgentGrid agentes={agentesData} />
     </main>
-  </div>
+  );
+}
 
-  <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('loadingScreen').style.display = 'none';
-        document.getElementById('mainContent').classList.remove('hidden');
-      }, 5000);
-    });
+function HeroSection() {
+  return (
+    <section className="flex flex-col items-center justify-center text-center py-24 px-6">
+      <img src="/sello-omega.svg" alt="Sello Omega" className="w-20 h-20 mb-6" />
+      <h1 className="text-3xl md:text-5xl font-semibold max-w-3xl">
+        ❝ Donde el propósito despierta. Donde la inteligencia se alinea. ❞
+      </h1>
+      <button
+        onClick={() => document.getElementById("categorias")?.scrollIntoView({ behavior: "smooth" })}
+        className="mt-8 px-6 py-3 bg-white text-black font-medium rounded-xl hover:bg-gray-300 transition"
+      >
+        Explorar el Santuario
+      </button>
+    </section>
+  );
+}
 
-    function mostrarSeccion(id) {
-      const secciones = document.querySelectorAll('main > section');
-      secciones.forEach(sec => sec.classList.add('hidden'));
-      document.getElementById(id).classList.remove('hidden');
-    }
-  </script>
-</body>
-</html>
+function CategorySection() {
+  const categorias = [
+    "Mentores y Guías",
+    "Constructores del Santuario",
+    "Analistas e Inteligencia Estratégica",
+    "Núcleo de Coordinación y Expansión",
+    "Custodios del Conocimiento",
+  ];
+
+  return (
+    <section id="categorias" className="py-16 px-6 bg-gray-900">
+      <h2 className="text-2xl md:text-4xl font-bold text-center mb-12">Divisiones del Santuario</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {categorias.map((categoria, idx) => (
+          <div
+            key={idx}
+            className="p-6 bg-gray-800 rounded-2xl shadow-md hover:shadow-lg transition text-center"
+          >
+            <h3 className="text-xl font-semibold">{categoria}</h3>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function AgentGrid({ agentes }) {
+  return (
+    <section className="py-20 px-6 bg-black">
+      <h2 className="text-2xl md:text-4xl font-bold text-center mb-12">Agentes del Santuario</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {agentes.map((agente, idx) => {
+          if (agente.nombre === "Visual Forge") {
+            return <img key={idx} src="/03_Fichas_de_Agentes/VisualForge_Ficha.png" alt="Visual Forge" className="rounded-2xl shadow-lg" />;
+          } else if (agente.nombre === "GodPrompts") {
+            return <img key={idx} src="/03_Fichas_de_Agentes/GodPrompts_Ficha.png" alt="God Prompts" className="rounded-2xl shadow-lg" />;
+          } else if (agente.nombre === "SrRiley") {
+            return <img key={idx} src="/03_Fichas_de_Agentes/SrRiley_Ficha.png" alt="Sr Riley" className="rounded-2xl shadow-lg" />;
+          } else {
+            return <AgentCard key={idx} data={agente} />;
+          }
+        })}
+      </div>
+    </section>
+  );
+}
+
+function AgentCard({ data }) {
+  const { nombre, rol_sagrado, invocacion, promesa } = data;
+  return (
+    <div className="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition h-full flex flex-col justify-between">
+      <div>
+        <h3 className="text-xl font-bold mb-1">{nombre}</h3>
+        <p className="text-sm text-gray-400 italic mb-4">{rol_sagrado}</p>
+        <blockquote className="text-md font-medium border-l-4 border-purple-500 pl-4 mb-4">“{invocacion}”</blockquote>
+      </div>
+      <p className="text-sm text-gray-300">{promesa}</p>
+    </div>
+  );
+}
